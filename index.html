@@ -394,6 +394,103 @@
     text-transform: uppercase;
   }
 
+  /* ───── motion ───── */
+
+  ::selection { background: var(--ink); color: var(--paper); }
+  ::-moz-selection { background: var(--ink); color: var(--paper); }
+
+  /* link underline draw (always on, no JS needed) */
+  .contact a {
+    border-bottom: 0;
+    background-image: linear-gradient(currentColor, currentColor);
+    background-position: 0 100%;
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+    transition: background-size .35s var(--ease-out), color .15s var(--ease-out);
+  }
+  .contact a:not(:hover) { background-size: 0 1px; }
+  .contact a:hover { color: var(--ink); background-size: 100% 1px; }
+
+  /* work card hover lift */
+  .work {
+    transition: transform .25s var(--ease-out);
+  }
+  .work-meta {
+    transition: color .2s var(--ease-out);
+  }
+  .work:hover { transform: translateY(-2px); }
+  .work:hover .work-meta { color: var(--ink-2); }
+
+  /* JS-gated reveals — only activate when script confirms */
+  .js-motion .reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity .7s var(--ease-out), transform .7s var(--ease-out);
+    will-change: opacity, transform;
+  }
+  .js-motion .reveal.in { opacity: 1; transform: none; }
+
+  /* eyebrow hairline draw */
+  .eyebrow { position: relative; }
+  .js-motion .eyebrow { border-bottom-color: transparent; }
+  .js-motion .eyebrow::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 1px;
+    background: var(--rule);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .8s var(--ease-out) .1s;
+  }
+  .js-motion section.in .eyebrow::after,
+  .js-motion .eyebrow.in::after { transform: scaleX(1); }
+
+  /* name letter reveal */
+  .js-motion .name .char {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity .7s var(--ease-out), transform .7s var(--ease-out);
+  }
+  .js-motion .name.in .char { opacity: 1; transform: none; }
+
+  /* positioning word reveal */
+  .js-motion .positioning .word {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity .55s var(--ease-out), transform .55s var(--ease-out);
+  }
+  .js-motion .positioning.in .word { opacity: 1; transform: none; }
+
+  /* scroll progress bar */
+  .progress {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    z-index: 100;
+    pointer-events: none;
+  }
+  .progress::after {
+    content: "";
+    display: block;
+    height: 100%;
+    width: var(--p, 0%);
+    background: var(--ink);
+    transition: width .08s linear;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .js-motion .reveal,
+    .js-motion .name .char,
+    .js-motion .positioning .word { opacity: 1 !important; transform: none !important; }
+    .js-motion .eyebrow { border-bottom-color: var(--rule) !important; }
+    .js-motion .eyebrow::after { display: none !important; }
+    .progress { display: none !important; }
+    .contact a { background-size: 100% 1px !important; }
+  }
+
   @page { size: A4; margin: 0; }
   @media print {
     body { background: var(--paper); }
@@ -408,6 +505,14 @@
     .target,
     .positioning b { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     html, body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    /* kill motion in print */
+    .js-motion .reveal,
+    .js-motion .name .char,
+    .js-motion .positioning .word { opacity: 1 !important; transform: none !important; }
+    .js-motion .eyebrow { border-bottom-color: var(--rule) !important; }
+    .js-motion .eyebrow::after { display: none !important; }
+    .progress { display: none !important; }
+    .contact a { background-size: 100% 1px !important; border-bottom: 1px solid var(--rule) !important; }
   }
 </style>
 </head>
@@ -626,6 +731,118 @@
 
 
 </main>
+
+<script>
+(function() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  document.documentElement.classList.add('js-motion');
+
+  // 1. name letter reveal — split chars, fire on load
+  document.querySelectorAll('.name').forEach(el => {
+    const text = el.textContent;
+    el.textContent = '';
+    text.split('').forEach((c, i) => {
+      const span = document.createElement('span');
+      span.className = 'char';
+      span.textContent = c === ' ' ? ' ' : c;
+      span.style.transitionDelay = (i * 30) + 'ms';
+      el.appendChild(span);
+    });
+    requestAnimationFrame(() => requestAnimationFrame(() => el.classList.add('in')));
+  });
+
+  // 2. positioning word reveal — split text nodes, preserve <b> tags
+  document.querySelectorAll('.positioning').forEach(el => {
+    let wordIdx = 0;
+    const walk = (node) => {
+      Array.from(node.childNodes).forEach(child => {
+        if (child.nodeType === 3) {
+          const text = child.textContent;
+          const parts = text.split(/(\s+)/);
+          const frag = document.createDocumentFragment();
+          parts.forEach(p => {
+            if (!p) return;
+            if (/^\s+$/.test(p)) {
+              frag.appendChild(document.createTextNode(p));
+            } else {
+              const span = document.createElement('span');
+              span.className = 'word';
+              span.textContent = p;
+              span.style.transitionDelay = (wordIdx * 30) + 'ms';
+              frag.appendChild(span);
+              wordIdx++;
+            }
+          });
+          node.replaceChild(frag, child);
+        } else if (child.nodeType === 1) {
+          walk(child);
+        }
+      });
+    };
+    walk(el);
+  });
+
+  // 3. intersection-driven reveals on sections, work cards, jobs
+  const targets = document.querySelectorAll('section, .work, .job');
+  targets.forEach(el => el.classList.add('reveal'));
+
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+
+  targets.forEach(el => io.observe(el));
+
+  // 4. job date type-on
+  document.querySelectorAll('.job .dates').forEach(el => {
+    const target = el.textContent;
+    el.dataset.target = target;
+    el.textContent = '';
+    const dio = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const t = e.target.dataset.target;
+          let i = 0;
+          const tick = () => {
+            if (i <= t.length) {
+              e.target.textContent = t.slice(0, i);
+              i++;
+              setTimeout(tick, 28);
+            }
+          };
+          tick();
+          dio.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.6 });
+    dio.observe(el);
+  });
+
+  // 5. scroll progress bar
+  const progress = document.createElement('div');
+  progress.className = 'progress';
+  document.body.prepend(progress);
+  let ticking = false;
+  const updateProgress = () => {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = max > 0 ? Math.min(100, (window.scrollY / max) * 100) : 0;
+    progress.style.setProperty('--p', pct + '%');
+    ticking = false;
+  };
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(updateProgress);
+      ticking = true;
+    }
+  }, { passive: true });
+  updateProgress();
+})();
+</script>
 
 </body>
 </html>
