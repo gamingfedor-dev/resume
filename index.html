@@ -86,6 +86,7 @@
     color: var(--ink);
     font-variation-settings: "opsz" 72;
   }
+  .name .line { display: block; }
   .role-line {
     grid-column: 1 / -1;
     grid-row: 2;
@@ -522,7 +523,7 @@
 <main class="page" data-screen-label="01 Resume — Overview">
 
   <header class="masthead">
-    <h1 class="name">Oleh Fedoryshyn</h1>
+    <h1 class="name"><span class="line">Oleh</span><span class="line">Fedoryshyn</span></h1>
     <address class="contact">
       <div class="row"><a href="mailto:vout0rpvs@gmail.com">vout0rpvs@gmail.com</a></div>
       <div class="row">+380 99 196 7980</div>
@@ -741,14 +742,18 @@
 
   // 1. name letter reveal — split chars, fire on load
   document.querySelectorAll('.name').forEach(el => {
-    const text = el.textContent;
-    el.textContent = '';
-    text.split('').forEach((c, i) => {
-      const span = document.createElement('span');
-      span.className = 'char';
-      span.textContent = c === ' ' ? ' ' : c;
-      span.style.transitionDelay = (i * 30) + 'ms';
-      el.appendChild(span);
+    let charIdx = 0;
+    el.querySelectorAll('.line').forEach(line => {
+      const text = line.textContent;
+      line.textContent = '';
+      text.split('').forEach(c => {
+        const span = document.createElement('span');
+        span.className = 'char';
+        span.textContent = c;
+        span.style.transitionDelay = (charIdx * 30) + 'ms';
+        line.appendChild(span);
+        charIdx++;
+      });
     });
     requestAnimationFrame(() => requestAnimationFrame(() => el.classList.add('in')));
   });
