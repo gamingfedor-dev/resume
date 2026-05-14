@@ -1,0 +1,631 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Oleh Fedoryshyn — Design Engineer · The Gradient</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500;1,6..72,600&family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --color-black:        #000;
+    --color-white:        #fff;
+    --color-white-80:     rgba(255,255,255,.80);
+    --color-white-70:     rgba(255,255,255,.70);
+    --color-white-50:     rgba(255,255,255,.50);
+    --color-white-20:     rgba(255,255,255,.20);
+    --color-white-10:     rgba(255,255,255,.10);
+    --color-white-06:     rgba(255,255,255,.06);
+
+    --paper:        var(--color-black);
+    --paper-2:      #000;
+    --ink:          var(--color-white);
+    --ink-2:        var(--color-white-70);
+    --ink-3:        var(--color-white-50);
+    --rule:         var(--color-white-10);
+    --rule-2:       var(--color-white-06);
+
+    --fs-xs:   11px;
+    --fs-sm:   12px;
+    --fs-md:   14px;
+    --fs-lg:   18px;
+    --fs-xl:   23px;
+    --fs-2xl:  34px;
+    --fs-3xl:  84px;
+
+    --font-display: 'Newsreader', 'ABC Gramercy', Georgia, 'Times New Roman', serif;
+    --font-sans:    'Geist', 'ABC Monument Grotesk', -apple-system, 'Helvetica Neue', Arial, sans-serif;
+    --font-mono:    'Geist Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+    --ease-out:    cubic-bezier(0, 0, .2, 1);
+    --ease-in-out: cubic-bezier(.4, 0, .2, 1);
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--paper-2);
+    font-family: var(--font-sans);
+    color: var(--ink);
+    font-size: var(--fs-md);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "ss01", "ss02", "cv11";
+    letter-spacing: -0.005em;
+  }
+
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 24px auto;
+    padding: 18mm 18mm 16mm;
+    background: var(--paper);
+    box-shadow: 0 0 0 1px var(--rule), 0 30px 80px -40px rgba(0,0,0,.9);
+    position: relative;
+  }
+  .page + .page { margin-top: 12px; }
+
+  header.masthead {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0 24px;
+    padding-bottom: 18px;
+  }
+  .name {
+    grid-column: 1 / 2;
+    grid-row: 1;
+    font-family: var(--font-display);
+    font-size: var(--fs-3xl);
+    font-weight: 400;
+    font-style: normal;
+    letter-spacing: -0.042em;
+    line-height: 0.92;
+    margin: 0 0 14px;
+    color: var(--ink);
+    font-variation-settings: "opsz" 72;
+  }
+  .role-line {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    margin-top: 4px;
+    font-family: var(--font-mono);
+    font-size: var(--fs-xs);
+    color: var(--ink-3);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .role-line .pill {
+    display: inline-block;
+    padding: 2px 10px 3px;
+    border: 1px solid var(--ink);
+    color: var(--ink);
+    background: transparent;
+    border-radius: 999px;
+    margin-left: 8px;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    vertical-align: 1px;
+    font-weight: 500;
+  }
+  .contact {
+    grid-column: 2 / 3;
+    grid-row: 1;
+    align-self: start;
+    font-family: var(--font-mono);
+    font-size: var(--fs-xs);
+    color: var(--ink-2);
+    text-align: right;
+    line-height: 1.7;
+  }
+  .contact a {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px solid var(--rule);
+    transition: color .15s var(--ease-out), border-color .15s var(--ease-out);
+  }
+  .contact a:hover { color: var(--ink); border-bottom-color: var(--ink); }
+  .contact .row { white-space: nowrap; }
+
+  .target {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    column-gap: 14px;
+    row-gap: 6px;
+    margin: 22px 0 0;
+    padding: 0;
+    background: none;
+    border-left: 0;
+    font-family: var(--font-mono);
+    font-size: var(--fs-xs);
+    color: var(--ink-3);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .target > span { white-space: nowrap; }
+  .target b { color: var(--ink); font-weight: 500; }
+  .target .label {
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-size: var(--fs-xs);
+    color: var(--ink-3);
+    font-weight: 500;
+  }
+  .target .dot { width: 3px; height: 3px; background: var(--ink-3); border-radius: 999px; display: inline-block; }
+
+  section { margin-top: 42px; }
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-3);
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-weight: 500;
+    padding-bottom: 10px;
+    margin-bottom: 18px;
+    border-bottom: 1px solid var(--rule);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .eyebrow .right {
+    color: var(--ink-3);
+    opacity: 0.7;
+    font-weight: 400;
+    letter-spacing: 0.14em;
+  }
+  h2 {
+    font-family: var(--font-display);
+    font-size: 30px;
+    font-weight: 400;
+    color: var(--ink);
+    letter-spacing: -0.032em;
+    line-height: 1.02;
+    margin: 0 0 20px;
+    font-variation-settings: "opsz" 36;
+  }
+
+  .positioning {
+    font-family: var(--font-sans);
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 1.32;
+    letter-spacing: -0.014em;
+    color: var(--ink);
+    max-width: 32ch;
+    text-wrap: pretty;
+  }
+  .positioning b {
+    font-weight: 500;
+    font-style: normal;
+    color: var(--ink);
+    background: none;
+    padding: 0;
+  }
+
+  .work-grid { display: grid; gap: 22px; }
+  .work {
+    display: block;
+  }
+  .work-meta {
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    color: var(--ink-3);
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-weight: 500;
+    padding-bottom: 8px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .work h3 {
+    margin: 0 0 6px;
+    font-family: var(--font-sans);
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: -0.008em;
+    line-height: 1.3;
+    color: var(--ink);
+  }
+  .work p {
+    margin: 0;
+    color: var(--ink-2);
+    font-size: 16px;
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+  .work p b { color: var(--ink); font-weight: 500; }
+  .work .tags {
+    margin-top: 6px;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    color: var(--ink-3);
+    opacity: 0.6;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .work .tags span + span::before {
+    content: "·";
+    margin: 0 7px;
+    color: var(--rule);
+  }
+
+  .job { display: grid; grid-template-columns: 18ch 1fr; gap: 18px; padding: 9px 0; border-top: 1px solid var(--rule); }
+  .job:first-of-type { border-top: 0; padding-top: 0; }
+  .job .when {
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    color: var(--ink-3);
+    letter-spacing: 0.04em;
+    line-height: 1.6;
+    text-transform: uppercase;
+  }
+  .job .when .dates { display: block; color: var(--ink-2); }
+  .job .when .loc { display: block; color: var(--ink-3); margin-top: 3px; }
+  .job h3 {
+    margin: 0 0 4px;
+    font-family: var(--font-sans);
+    font-size: 17px;
+    font-weight: 500;
+    letter-spacing: -0.008em;
+    line-height: 1.25;
+    color: var(--ink);
+  }
+  .job .at {
+    margin: 0 0 8px;
+    font-size: 16px;
+    color: var(--ink-2);
+    line-height: 1.5;
+  }
+  .job .at b { color: var(--ink); font-weight: 500; }
+  .job .at em {
+    font-style: normal;
+    color: var(--ink-3);
+    opacity: 0.7;
+    font-size: 11.5px;
+  }
+  .job .ctx {
+    margin: 0 0 8px;
+    font-size: 16px;
+    color: var(--ink-2);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+  .job .ctx b { color: var(--ink); font-weight: 500; }
+  .job ul { margin: 0; padding: 0; list-style: none; }
+  .job ul li {
+    position: relative;
+    padding-left: 16px;
+    margin-bottom: 6px;
+    font-size: 16px;
+    color: var(--ink-2);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+  .job ul li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 9px;
+    width: 6px;
+    height: 6px;
+    border-radius: 999px;
+    background: var(--ink);
+  }
+  .job ul li b { color: var(--ink); font-weight: 500; }
+  .job .stack {
+    margin-top: 8px;
+    padding-top: 6px;
+    border-top: 1px solid var(--rule);
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    color: var(--ink-3);
+    letter-spacing: 0.06em;
+    line-height: 1.6;
+    text-transform: uppercase;
+  }
+  .job .stack .lbl { color: var(--ink); margin-right: 8px; font-weight: 500; }
+  .job .stack em { font-style: normal; color: var(--ink-3); text-transform: uppercase; }
+
+  .skills { display: grid; grid-template-columns: 18ch 1fr; gap: 18px; }
+  .skill-row { display: contents; }
+  .skill-row .k {
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    color: var(--ink-3);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    padding: 5px 0;
+    border-top: 1px solid var(--rule);
+  }
+  .skill-row .v {
+    font-size: 16px;
+    color: var(--ink-2);
+    padding: 7px 0;
+    border-top: 1px solid var(--rule);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+  .skill-row .v b { color: var(--ink); font-weight: 500; }
+  .skill-row:first-child .k,
+  .skill-row:first-child .v { border-top: 0; padding-top: 0; }
+
+  code {
+    font-family: var(--font-mono);
+    font-size: 0.88em;
+    color: var(--ink);
+    background: var(--color-white-10);
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    padding: 0 5px;
+    letter-spacing: -0.01em;
+  }
+
+  .edu {
+    display: grid;
+    grid-template-columns: 18ch 1fr;
+    gap: 18px;
+    font-size: 16px;
+    color: var(--ink-2);
+    line-height: 1.6;
+  }
+  .edu .when {
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    color: var(--ink-3);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+  }
+  .edu b { color: var(--ink); font-weight: 500; }
+
+  .colophon {
+    margin-top: 24px;
+    padding-top: 10px;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    color: var(--ink-3);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  @page { size: A4; margin: 0; }
+  @media print {
+    body { background: var(--paper); }
+    .page {
+      margin: 0;
+      box-shadow: none;
+      width: 210mm;
+      min-height: 297mm;
+      padding: 14mm 16mm;
+      background: var(--paper);
+    }
+    .target,
+    .positioning b { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    html, body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+
+<main class="page" data-screen-label="01 Resume — Overview">
+
+  <header class="masthead">
+    <h1 class="name">Oleh Fedoryshyn</h1>
+    <address class="contact">
+      <div class="row"><a href="mailto:vout0rpvs@gmail.com">vout0rpvs@gmail.com</a></div>
+      <div class="row">+380 99 196 7980</div>
+      <div class="row">Lviv, Ukraine · EET</div>
+      <div class="row"><a href="https://linkedin.com/in/oleg-fedoryshyn">linkedin.com/in/oleg-fedoryshyn</a></div>
+      <div class="row"><a href="https://github.com/gamingfedor-dev/team-lead-harness">github.com/gamingfedor-dev</a></div>
+    </address>
+    <div class="role-line">
+      Design Engineer · React + TypeScript · Figma → MCP → Claude Code in production
+    </div>
+  </header>
+
+  <div class="target">
+    <span class="label">Open for</span>
+    <span><b>Part-time or full-time</b></span><span class="dot"></span>
+    <span>Lviv &amp; Remote</span><span class="dot"></span>
+    <span>up to 40 h/wk</span><span class="dot"></span>
+    <span>EET, EU + ET/CT overlap</span>
+  </div>
+
+  <section>
+    <div class="eyebrow"><span>Positioning</span></div>
+    <h2>Design engineer, AI-native.</h2>
+    <p class="positioning">
+      Eight years frontend. I work in <b>Figma MCP → Claude Code</b>, with Obsidian holding the design memory between sessions. I am the one making the design and architecture calls, and that is the work I want to do. <b>UI is the product</b>, so I want to be the one shipping it. I will polish a screen until every interaction, every resolution, every pattern matches the way I want it.
+    </p>
+  </section>
+
+  <section>
+    <div class="eyebrow"><span>Selected work</span></div>
+    <h2>Four things I do every day.</h2>
+    <div class="work-grid">
+
+      <article class="work">
+        <div class="work-meta">Design → code</div>
+        <div>
+          <h3>Figma MCP → Claude Code ↔ Obsidian, daily.</h3>
+          <p>Figma feeds Claude Code through MCP. Claude Code reads and writes an Obsidian vault that remembers the project's design: tokens, past component decisions, palette, motion patterns. A new screen lands knowing what is already there. Same workflow on a React admin app and on a Qt6/QML ground-control app.</p>
+          <div class="tags"><span>Figma MCP</span><span>Claude Code</span><span>Obsidian memory</span></div>
+        </div>
+      </article>
+
+      <article class="work">
+        <div class="work-meta">Component architecture</div>
+        <div>
+          <h3>Component library behind the three largest admin surfaces.</h3>
+          <p>Dynamic Grid is a form primitive built from config. The three biggest admin forms run on it. Shared layout primitives across the responsive layer: sidebar, drawer, icon-rail. Optimistic updates with rollback. New admin screens ship without redoing layout each time.</p>
+          <div class="tags"><span>React</span><span>TypeScript generics</span><span>optimistic UI</span></div>
+        </div>
+      </article>
+
+      <article class="work">
+        <div class="work-meta">Motion</div>
+        <div>
+          <h3>One motion module, three curves, used semantically.</h3>
+          <p>All motion lives in one module, three curves. Spring for interactions, bouncy spring for pops, smooth ease for fades. Direction means something: on the Roles dual-panel, assign moves right, remove moves left. Pending states pulse. Notifications stack with <code>popLayout</code>. Lists stagger on reveal.</p>
+          <div class="tags"><span>Framer Motion</span><span>AnimatePresence</span><span>a11y under motion</span></div>
+        </div>
+      </article>
+
+      <article class="work">
+        <div class="work-meta">Agent orchestration · OSS</div>
+        <div>
+          <h3>Orchestration layer with persistent memory that compounds.</h3>
+          <p>Built an agent orchestration layer with persistent memory. It learns from past mistakes and grows alongside the project. Context carries from session to session, so day-by-day work compounds instead of restarting from scratch. Published as <b>team-lead-harness</b>.</p>
+          <div class="tags"><span>agent orchestration</span><span>persistent memory</span><span>team-lead-harness</span></div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+</main>
+
+<main class="page" data-screen-label="02 Resume — Experience">
+
+  <section style="margin-top:0">
+    <div class="eyebrow"><span>Track record</span></div>
+    <h2>Experience</h2>
+
+    <div class="job">
+      <div class="when">
+        <span class="dates">Feb 2022 — present</span>
+        <span class="loc">Remote · Lviv</span>
+      </div>
+      <div>
+        <h3>Expert Frontend Engineer</h3>
+        <p class="at">Ciklum, outstaffed to <b>Newmark Group</b> <em>(NYSE: NMRK)</em></p>
+        <p class="ctx">iDeal is Newmark's multi-tenant Commercial Real Estate platform. <b>WebClient.Admin</b> is the React / TypeScript / Vite admin SWA, the administrative microservice in the v3 iDeal rewrite.</p>
+        <ul>
+          <li><b>Sole engineer on WebClient.Admin.</b> Layout system, shared UI primitives, optimistic updates with rollback, full responsive layer. API-first: I ship the frontend ahead of the backend endpoints.</li>
+          <li><b>Figma → MCP → Claude Code in the daily loop.</b> The component spec lands in Claude Code with design tokens already resolved. The path from designer handoff to shipped pixel collapses on my side.</li>
+          <li>TypeScript discipline across the admin. Types match the API exactly, so wrong shapes fail at build. Component APIs are tight enough that you cannot pass an invalid combination of props.</li>
+          <li><b>Motion, centralized.</b> Direction means something: left and right say add and remove. Pending states pulse, notifications stack, lists stagger. Motion respects accessibility settings.</li>
+          <li>AI extraction wired into the product flow. Python + OpenAI API + Azure Functions behind iDeal Quotes. Replaced manual Excel-to-form copy-paste.</li>
+        </ul>
+        <div class="stack"><span class="lbl">stack</span>React · TypeScript · Vite · Tailwind · Framer Motion · Playwright · Azure SWA · Azure AD · SignalR · <em>concurrent legacy:</em> Angular, RxJS, Signals</div>
+      </div>
+    </div>
+
+    <div class="job">
+      <div class="when">
+        <span class="dates">Jan 2026 — present</span>
+        <span class="loc">Remote · Lviv · Part-time</span>
+      </div>
+      <div>
+        <h3>C++ / Qt Software Engineer <span style="font-weight:400;color:var(--ink-3);font-size:var(--fs-sm)">(concurrent)</span></h3>
+        <p class="at">Confidential Defense Tech <em>— NDA. Sentinel UAV ground control, embedded hardware. Team of 3 + PM.</em></p>
+        <ul>
+          <li><b>Operator UI built from Figma into Qt6/QML.</b> The design system carries over to QML: dark theme, 8px grid, Roboto Flex variable font.</li>
+          <li><b>AI-assisted workspace started here.</b> Reorganized the codebase from flat to feature-based using Claude Code. Later ported to the React engagement.</li>
+        </ul>
+        <div class="stack"><span class="lbl">stack</span>C++ · Qt6 · QML · GStreamer · MAVLink · CMake</div>
+      </div>
+    </div>
+
+    <div class="job">
+      <div class="when">
+        <span class="dates">Aug 2020 — Oct 2021</span>
+        <span class="loc">Remote</span>
+      </div>
+      <div>
+        <h3>Senior Frontend Engineer</h3>
+        <p class="at">GlobalLogic <em>— JioMeet (Zoom rival, India) · Roku advertising CRM. Angular, IC.</em></p>
+      </div>
+    </div>
+
+    <div class="job">
+      <div class="when">
+        <span class="dates">2018 — Aug 2020</span>
+        <span class="loc">Lviv</span>
+      </div>
+      <div>
+        <h3>Junior → Frontend Engineer → Frontend Lead</h3>
+        <p class="at">KindGeek · SPDeveloper · Sombra · SoftStar IF</p>
+        <p class="ctx" style="margin-bottom:0">Lead at KindGeek on <b>EPIONE / Movebox</b> (healthcare, ZA) and <b>GeekHub</b> internal HRM. First hands-on shared-component-library work. Earlier junior Angular and intern roles.</p>
+      </div>
+    </div>
+
+  </section>
+
+
+</main>
+
+<main class="page" data-screen-label="03 Resume — Skills & Education">
+
+  <section style="margin-top:0">
+    <div class="eyebrow"><span>Stack</span></div>
+    <h2>Skills</h2>
+    <div class="skills">
+
+      <div class="skill-row">
+        <div class="k">Design → code</div>
+        <div class="v"><b>Figma → MCP → Claude Code</b> as daily workflow (Cursor optional). Local Figma MCP server.</div>
+      </div>
+
+      <div class="skill-row">
+        <div class="k">React &amp; TS</div>
+        <div class="v"><b>React</b>, <b>TypeScript</b>, Vite. Hooks, suspense, generics. Types match the API exactly, so wrong shapes fail at build. Tight component APIs so you cannot pass an invalid prop combination. Optimistic updates with rollback. Next.js (familiar).</div>
+      </div>
+
+      <div class="skill-row">
+        <div class="k">React Native</div>
+        <div class="v">Ramp-up territory. The cross-platform component model is familiar from <b>Qt6/QML production work</b>. <b>Reanimated</b> and <b>Moti</b> on deck. Framer Motion translates cleanly to their gesture and worklet model.</div>
+      </div>
+
+      <div class="skill-row">
+        <div class="k">Motion</div>
+        <div class="v"><b>Framer Motion</b> as the only animation library. Variants and gestures, layout animation, list reveals, accessibility settings respected. Qt6 QML animation primitives.</div>
+      </div>
+
+      <div class="skill-row">
+        <div class="k">Cross-platform UI</div>
+        <div class="v">Qt6/QML on embedded hardware (Sentinel, production) · responsive React layer (sidebar, drawer, icon-rail) · semantic HTML · WAI-ARIA · keyboard navigation</div>
+      </div>
+
+      <div class="skill-row">
+        <div class="k">Component libraries</div>
+        <div class="v">Form primitive built from config (<b>Dynamic Grid</b>) behind the three biggest admin surfaces. Layout primitives: sidebar, drawer, icon-rail, collapsibles, notification stack. Warm <b>&ldquo;soft admin&rdquo;</b> palette tuned for long sessions. Dark mode supported equally with light.</div>
+      </div>
+
+      <div class="skill-row">
+        <div class="k">AI tooling</div>
+        <div class="v"><b>Agent orchestration layer with persistent memory</b> that learns from past mistakes and compounds across sessions. <b>Claude Code</b> as the main loop (custom skills, hooks, orchestrator pattern). MCP servers, Obsidian as the memory store, Anthropic / OpenAI / Azure OpenAI APIs. Published as <b>team-lead-harness</b>.</div>
+      </div>
+
+      <div class="skill-row">
+        <div class="k">Tooling</div>
+        <div class="v">Angular (8 years) · RxJS · Signals · Node.js · Python · C++ · Azure DevOps · Azure SWA · GitLab · Docker · Jest · Playwright · Bash · Linux · macOS</div>
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow"><span>Background</span></div>
+    <h2>Education &amp; languages</h2>
+    <div class="edu">
+      <div class="when">2018</div>
+      <div><b>Master in Computer Science</b> · Vasyl Stefanyk Precarpathian National University</div>
+    </div>
+    <div class="edu" style="margin-top:8px">
+      <div class="when">languages</div>
+      <div>Ukrainian (native) · English <b>C1</b>, fluent in async business and technical communication</div>
+    </div>
+  </section>
+
+
+</main>
+
+</body>
+</html>
