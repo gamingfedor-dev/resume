@@ -588,8 +588,8 @@
         <div class="work-meta">The decisions</div>
         <div>
           <h3>I own the shape: PRDs, ADRs, the calls</h3>
-          <p>Those decisions are the layer closest to the code. I write them as PRDs and ADRs and make the architecture and product calls. API-first contracts let the frontend ship ahead of the backend. I drove splitting a legacy monolith into independent builds. Build time dropped from 1.5h to 15-20min, roughly 1h back per dev each merge cycle. The code itself is the final, smallest projection of everything above it.</p>
-          <div class="tags"><span>PRDs &amp; ADRs</span><span>API-first contracts</span><span>monolith decouple</span><span>what ships</span></div>
+          <p>Those decisions are the layer closest to the code. I write them as PRDs and ADRs and make the architecture and product calls. API-first contracts let the frontend ship ahead of the backend. The code itself is the final, smallest projection of everything above it.</p>
+          <div class="tags"><span>PRDs &amp; ADRs</span><span>API-first contracts</span><span>architecture calls</span><span>what ships</span></div>
         </div>
       </article>
 
@@ -616,7 +616,6 @@
         <ul>
           <li><b>Eight years of Angular, RxJS-heavy.</b> Config-driven form engine (<b>ngx-dynamic-grid</b>, open source) backs the three largest forms on iDeal. TypeScript field configs render reactive Angular Material controls. Cross-field rules, conditional surfaces, validation. New surfaces ship from config.</li>
           <li><b>Modern Angular at scale.</b> OnPush + signals migration on Angular 20. RxJS↔signals interop (<code>toSignal</code>/<code>toObservable</code>), standalone components, new control flow, <code>@defer</code>, <code>inject()</code> with functional guards and interceptors. Tenant-aware roles, audit logging.</li>
-          <li><b>Decoupled the Angular frontend from the .NET monolith</b> into two independent builds joined by a custom bridge. Build time 1.5h → 15–20min (~80%); every dev recovered ~1h per merge cycle.</li>
           <li><b>Sole engineer on WebClient.Admin</b> (React 19, Vite, Azure AD), the v3 admin microservice. Layout system, shared primitives, optimistic updates with rollback, full responsive layer. API-first: the frontend ships ahead of the backend endpoints.</li>
           <li><b>Agents in the daily loop.</b> Claude Code drives the build across the Angular and React surfaces; Figma MCP feeds specs in with design tokens resolved. The path from handoff to shipped pixel collapses on my side.</li>
           <li><b>AI extraction wired into the product flow.</b> Python + OpenAI API + Azure Functions behind iDeal Quotes. Replaced manual Excel-to-form copy-paste; accuracy 70% (late 2024) → 90–95% (2026).</li>
