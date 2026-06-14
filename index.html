@@ -532,7 +532,7 @@
       <div class="row"><a href="https://github.com/gamingfedor-dev/team-lead-harness">github.com/gamingfedor-dev</a></div>
     </address>
     <div class="role-line">
-      Product Engineer · React + TypeScript · Figma → MCP → Claude Code in production
+      Product Engineer · React + TypeScript · agents in the loop, shipping to production
     </div>
   </header>
 
@@ -548,7 +548,7 @@
     <div class="eyebrow"><span>Positioning</span></div>
     <h2>Product engineer, AI-native.</h2>
     <p class="positioning">
-      Eight years of frontend engineering. I work in <b>Figma MCP → Claude Code</b>, with Obsidian holding the project memory between sessions. I make the architecture and product calls, and that is the work I want to do. <b>UI is the product</b>, so I own it end to end — from the data layer to the last interaction. I will polish a screen until every interaction, every resolution, every pattern matches the way I want it.
+      Eight years of frontend engineering. I build with <b>agents in the loop</b> — orchestration, persistent memory, modern frameworks — with Claude Code as the main loop and Obsidian holding project memory between sessions. Figma MCP is one input among many. I make the architecture and product calls, and that is the work I want to do. <b>UI is the product</b>, so I own it end to end — from the data layer to the last interaction. I will polish a screen until every interaction, every resolution, every pattern matches the way I want it.
     </p>
   </section>
 
@@ -558,11 +558,20 @@
     <div class="work-grid">
 
       <article class="work">
-        <div class="work-meta">Design → code</div>
+        <div class="work-meta">Agent orchestration · OSS</div>
         <div>
-          <h3>Figma MCP → Claude Code ↔ Obsidian, daily.</h3>
-          <p>Figma feeds Claude Code through MCP. Claude Code reads and writes an Obsidian vault that remembers the project's design: tokens, past component decisions, palette, motion patterns. A new screen lands knowing what is already there. Same workflow on a React admin app and on a Qt6/QML ground-control app.</p>
-          <div class="tags"><span>Figma MCP</span><span>Claude Code</span><span>Obsidian memory</span></div>
+          <h3>Orchestration layer with persistent memory that compounds.</h3>
+          <p>Built an agent orchestration layer with persistent memory. It learns from past mistakes and grows alongside the project. Context carries from session to session, so day-by-day work compounds instead of restarting from scratch. The same workspace runs an <b>adversarial review pipeline tuned for code written by non-engineers</b>, posting line-specific comments on every MR or PR. Works on GitLab, GitHub, Bitbucket — any version control with a CLI. Published as <b>team-lead-harness</b>.</p>
+          <div class="tags"><span>agent orchestration</span><span>persistent memory</span><span>non-engineer code review</span><span>team-lead-harness</span></div>
+        </div>
+      </article>
+
+      <article class="work">
+        <div class="work-meta">Agents in the loop</div>
+        <div>
+          <h3>Claude Code as the main loop, daily.</h3>
+          <p>Claude Code drives the build with custom skills, hooks, and an orchestrator pattern. It reads and writes an Obsidian vault that remembers the project: tokens, past component decisions, palette, motion patterns. Figma MCP feeds specs in as one input among many. A new screen lands knowing what is already there. Same workflow on a React admin app and on a Qt6/QML ground-control app.</p>
+          <div class="tags"><span>Claude Code</span><span>MCP</span><span>Obsidian memory</span><span>Figma MCP</span></div>
         </div>
       </article>
 
@@ -581,15 +590,6 @@
           <h3>One motion module, three curves, used semantically.</h3>
           <p>All motion lives in one module, three curves. Spring for interactions, bouncy spring for pops, smooth ease for fades. Direction means something: on the Roles dual-panel, assign moves right, remove moves left. Pending states pulse. Notifications stack with <code>popLayout</code>. Lists stagger on reveal.</p>
           <div class="tags"><span>Framer Motion</span><span>AnimatePresence</span><span>a11y under motion</span></div>
-        </div>
-      </article>
-
-      <article class="work">
-        <div class="work-meta">Agent orchestration · OSS</div>
-        <div>
-          <h3>Orchestration layer with persistent memory that compounds.</h3>
-          <p>Built an agent orchestration layer with persistent memory. It learns from past mistakes and grows alongside the project. Context carries from session to session, so day-by-day work compounds instead of restarting from scratch. The same workspace runs an <b>adversarial review pipeline tuned for code written by non-engineers</b>, posting line-specific comments on every MR or PR. Works on GitLab, GitHub, Bitbucket — any version control with a CLI. Published as <b>team-lead-harness</b>.</p>
-          <div class="tags"><span>agent orchestration</span><span>persistent memory</span><span>non-engineer code review</span><span>team-lead-harness</span></div>
         </div>
       </article>
 
@@ -615,7 +615,7 @@
         <p class="ctx">iDeal is Newmark's multi-tenant Commercial Real Estate platform. <b>WebClient.Admin</b> is the React / TypeScript / Vite admin SWA, the administrative microservice in the v3 iDeal rewrite.</p>
         <ul>
           <li><b>Sole engineer on WebClient.Admin.</b> Layout system, shared UI primitives, optimistic updates with rollback, full responsive layer. API-first: I ship the frontend ahead of the backend endpoints.</li>
-          <li><b>Figma → MCP → Claude Code in the daily loop.</b> The component spec lands in Claude Code with design tokens already resolved. The path from designer handoff to shipped pixel collapses on my side.</li>
+          <li><b>Agents in the daily loop.</b> Claude Code drives the build; Figma MCP feeds specs in with design tokens already resolved. The path from handoff to shipped pixel collapses on my side.</li>
           <li>TypeScript discipline across the admin. Types match the API exactly, so wrong shapes fail at build. Component APIs are tight enough that you cannot pass an invalid combination of props.</li>
           <li><b>Motion, centralized.</b> Direction means something: left and right say add and remove. Pending states pulse, notifications stack, lists stagger. Motion respects accessibility settings.</li>
           <li>AI extraction wired into the product flow. Python + OpenAI API + Azure Functions behind iDeal Quotes. Replaced manual Excel-to-form copy-paste.</li>
@@ -676,8 +676,13 @@
     <div class="skills">
 
       <div class="skill-row">
+        <div class="k">AI tooling</div>
+        <div class="v"><b>Agent orchestration layer with persistent memory</b> that learns from past mistakes and compounds across sessions. <b>Claude Code</b> as the main loop (custom skills, hooks, orchestrator pattern). MCP servers, Obsidian as the memory store, Anthropic / OpenAI / Azure OpenAI APIs. Published as <b>team-lead-harness</b>.</div>
+      </div>
+
+      <div class="skill-row">
         <div class="k">Design → code</div>
-        <div class="v"><b>Figma → MCP → Claude Code</b> as daily workflow (Cursor optional). Local Figma MCP server.</div>
+        <div class="v"><b>Figma MCP</b> as one input to the agent loop — specs land with design tokens resolved (Cursor optional). Local Figma MCP server.</div>
       </div>
 
       <div class="skill-row">
@@ -703,11 +708,6 @@
       <div class="skill-row">
         <div class="k">Component libraries</div>
         <div class="v">Form primitive built from config (<b>Dynamic Grid</b>) behind the three biggest admin surfaces. Layout primitives: sidebar, drawer, icon-rail, collapsibles, notification stack. Warm <b>&ldquo;soft admin&rdquo;</b> palette tuned for long sessions. Dark mode supported equally with light.</div>
-      </div>
-
-      <div class="skill-row">
-        <div class="k">AI tooling</div>
-        <div class="v"><b>Agent orchestration layer with persistent memory</b> that learns from past mistakes and compounds across sessions. <b>Claude Code</b> as the main loop (custom skills, hooks, orchestrator pattern). MCP servers, Obsidian as the memory store, Anthropic / OpenAI / Azure OpenAI APIs. Published as <b>team-lead-harness</b>.</div>
       </div>
 
       <div class="skill-row">
