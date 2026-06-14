@@ -561,8 +561,8 @@
         <div class="work-meta">Agent orchestration · OSS</div>
         <div>
           <h3>My daily main loop, and I keep reworking it</h3>
-          <p>An agent orchestration layer with persistent memory runs as my main loop across Angular 20, React 19, and Qt6/QML. It learns from past mistakes and compounds session to session. I rework the orchestration itself as I find better patterns: nested subagents, loops, tighter token budgets. An adversarial review pipeline posts line-specific comments on every MR or PR, on any VCS with a CLI. Published as <b>team-lead-harness</b>.</p>
-          <div class="tags"><span>Claude Code</span><span>persistent memory</span><span>self-improving</span><span>team-lead-harness</span></div>
+          <p>An agent orchestration layer with persistent memory runs as my main loop on every codebase I touch. It learns from past mistakes and compounds session to session. I rework the orchestration itself as I find better patterns: nested subagents, loops, tighter token budgets. An adversarial review pipeline posts line-specific comments on every change, on any version control with a CLI. Published as <b>team-lead-harness</b>.</p>
+          <div class="tags"><span>agents as leverage</span><span>persistent memory</span><span>self-improving</span><span>team-lead-harness</span></div>
         </div>
       </article>
 
@@ -570,26 +570,26 @@
         <div class="work-meta">Architecture &amp; scope</div>
         <div>
           <h3>I own the shape: PRDs, ADRs, the calls</h3>
-          <p>I write the PRDs and ADRs, define the scope, and make the architecture and product calls. API-first contracts let the frontend ship ahead of the backend. I drove the decision to decouple the iDeal frontend from the .NET monolith into two builds — build time dropped from 1.5h to 15–20min, ~1h back per dev each merge cycle. I decide what ships.</p>
+          <p>I write the PRDs and ADRs, define the scope, and make the architecture and product calls. API-first contracts let the frontend ship ahead of the backend instead of waiting on it. I drove the decision to split a legacy monolith into independent builds — build time dropped from 1.5h to 15–20min, ~1h back per dev each merge cycle. I decide what ships.</p>
           <div class="tags"><span>PRDs &amp; ADRs</span><span>API-first contracts</span><span>monolith decouple</span><span>scope</span></div>
         </div>
       </article>
 
       <article class="work">
-        <div class="work-meta">Ship UI · React + Angular</div>
+        <div class="work-meta">Scope &amp; tradeoffs</div>
         <div>
-          <h3>Ship UI across two stacks, from config</h3>
-          <p>Hands-on across React 19 and Angular 20. Config-driven forms render from plain TypeScript field configs. Shared layout primitives across the responsive layer: sidebar, drawer, icon-rail, optimistic updates with rollback. New screens ship without redoing layout each time.</p>
-          <div class="tags"><span>React 19</span><span>Angular 20</span><span>config-driven forms</span><span>optimistic UI</span></div>
+          <h3>I decide what not to build</h3>
+          <p>Cutting scope is often the call that saves the product. On the UAV ground station the spec asked for 4K hardware decode — I measured the actual display (1280×800), the field bandwidth, and the CPU budget, then dropped it and freed the headroom for telemetry. Before anything ships I ask whether it solves a real operational scenario or a theoretical edge case.</p>
+          <div class="tags"><span>measure first</span><span>scope cuts</span><span>tradeoffs</span><span>operational reality</span></div>
         </div>
       </article>
 
       <article class="work">
-        <div class="work-meta">Motion</div>
+        <div class="work-meta">Decompose &amp; de-dup</div>
         <div>
-          <h3>One motion module, three curves, used semantically</h3>
-          <p>All motion lives in one module, three curves. Spring for interactions, bouncy spring for pops, smooth ease for fades. Direction means something: on the Roles dual-panel, assign moves right, remove moves left. Pending states pulse. Notifications stack with <code>popLayout</code>, lists stagger on reveal. Motion carries meaning, not decoration.</p>
-          <div class="tags"><span>Framer Motion</span><span>AnimatePresence</span><span>a11y under motion</span></div>
+          <h3>I delete more than I add</h3>
+          <p>I own the whole vertical slice and kill orphaned copies before they drift. A redundancy audit on the mission system pulled repeated logic into shared utilities for a net −343 lines, zero behavior change. I decompose features into independent, testable pieces with explicit contracts, so one can change without breaking the rest. The same instinct ports to any stack.</p>
+          <div class="tags"><span>vertical slices</span><span>composition</span><span>testable units</span><span>−343 LOC</span></div>
         </div>
       </article>
 
