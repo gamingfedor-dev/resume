@@ -532,7 +532,7 @@
       <div class="row"><a href="https://github.com/gamingfedor-dev/team-lead-harness">github.com/gamingfedor-dev</a></div>
     </address>
     <div class="role-line">
-      Product Engineer · React + TypeScript · agents in the loop, shipping to production
+      Product Engineer · Angular + React + TypeScript · agents in the loop
     </div>
   </header>
 
@@ -548,7 +548,7 @@
     <div class="eyebrow"><span>Positioning</span></div>
     <h2>Product engineer, AI-native.</h2>
     <p class="positioning">
-      Eight years of frontend engineering. I build with <b>agents in the loop</b> — orchestration, persistent memory, modern frameworks — with Claude Code as the main loop and Obsidian holding project memory between sessions. Figma MCP is one input among many. I make the architecture and product calls, and that is the work I want to do. <b>UI is the product</b>, so I own it end to end — from the data layer to the last interaction. I will polish a screen until every interaction, every resolution, every pattern matches the way I want it.
+      Eight years of frontend engineering — Angular and React. I build with <b>agents in the loop</b> — orchestration, persistent memory, modern frameworks — with Claude Code as the main loop and Obsidian holding project memory between sessions. Figma MCP is one input among many. I make the architecture and product calls, and that is the work I want to do. <b>UI is the product</b>, so I own it end to end — from the data layer to the last interaction. I will polish a screen until every interaction, every resolution, every pattern matches the way I want it.
     </p>
   </section>
 
@@ -570,7 +570,7 @@
         <div class="work-meta">Agents in the loop</div>
         <div>
           <h3>Claude Code as the main loop, daily.</h3>
-          <p>Claude Code drives the build with custom skills, hooks, and an orchestrator pattern. It reads and writes an Obsidian vault that remembers the project: tokens, past component decisions, palette, motion patterns. Figma MCP feeds specs in as one input among many. A new screen lands knowing what is already there. Same workflow on a React admin app and on a Qt6/QML ground-control app.</p>
+          <p>Claude Code drives the build with custom skills, hooks, and an orchestrator pattern. It reads and writes an Obsidian vault that remembers the project: tokens, past component decisions, palette, motion patterns. Figma MCP feeds specs in as one input among many. A new screen lands knowing what is already there. Same workflow across an Angular 20 frontend, a React 19 admin, and a Qt6/QML ground-control app.</p>
           <div class="tags"><span>Claude Code</span><span>MCP</span><span>Obsidian memory</span><span>Figma MCP</span></div>
         </div>
       </article>
@@ -578,9 +578,9 @@
       <article class="work">
         <div class="work-meta">Component architecture</div>
         <div>
-          <h3>Component library behind the three largest admin surfaces.</h3>
-          <p>Dynamic Grid is a form primitive built from config. The three biggest admin forms run on it. Shared layout primitives across the responsive layer: sidebar, drawer, icon-rail. Optimistic updates with rollback. New admin screens ship without redoing layout each time.</p>
-          <div class="tags"><span>React</span><span>TypeScript generics</span><span>optimistic UI</span></div>
+          <h3>Config-driven form engine behind the three largest forms.</h3>
+          <p><b>ngx-dynamic-grid</b> (open source) is a config-driven Angular form engine — the three largest forms on iDeal run on it. TypeScript field configs render reactive Angular Material controls. On the React admin, shared layout primitives across the responsive layer: sidebar, drawer, icon-rail, optimistic updates with rollback. New screens ship without redoing layout each time.</p>
+          <div class="tags"><span>Angular</span><span>ngx-dynamic-grid</span><span>React</span><span>optimistic UI</span></div>
         </div>
       </article>
 
@@ -612,15 +612,17 @@
       <div>
         <h3>Expert Frontend Engineer</h3>
         <p class="at">Ciklum, outstaffed to <b>Newmark Group</b> <em>(NYSE: NMRK)</em></p>
-        <p class="ctx">iDeal is Newmark's multi-tenant Commercial Real Estate platform. <b>WebClient.Admin</b> is the React / TypeScript / Vite admin SWA, the administrative microservice in the v3 iDeal rewrite.</p>
+        <p class="ctx">iDeal is Newmark's multi-tenant Commercial Real Estate platform: <b>Angular 20</b> frontend mid-evolution to microservices. <b>WebClient.Admin</b> is the React 19 admin microservice in the v3 rewrite, which I own end to end.</p>
         <ul>
-          <li><b>Sole engineer on WebClient.Admin.</b> Layout system, shared UI primitives, optimistic updates with rollback, full responsive layer. API-first: I ship the frontend ahead of the backend endpoints.</li>
-          <li><b>Agents in the daily loop.</b> Claude Code drives the build; Figma MCP feeds specs in with design tokens already resolved. The path from handoff to shipped pixel collapses on my side.</li>
-          <li>TypeScript discipline across the admin. Types match the API exactly, so wrong shapes fail at build. Component APIs are tight enough that you cannot pass an invalid combination of props.</li>
-          <li><b>Motion, centralized.</b> Direction means something: left and right say add and remove. Pending states pulse, notifications stack, lists stagger. Motion respects accessibility settings.</li>
-          <li>AI extraction wired into the product flow. Python + OpenAI API + Azure Functions behind iDeal Quotes. Replaced manual Excel-to-form copy-paste.</li>
+          <li><b>Eight years of Angular, RxJS-heavy.</b> Config-driven form engine (<b>ngx-dynamic-grid</b>, open source) backs the three largest forms on iDeal — TypeScript field configs render reactive Angular Material controls. Cross-field rules, conditional surfaces, validation. New surfaces ship from config, not hand-built UI.</li>
+          <li><b>Modern Angular at scale.</b> OnPush + signals migration on Angular 20. RxJS↔signals interop (<code>toSignal</code>/<code>toObservable</code>), standalone components, new control flow, <code>@defer</code>, <code>inject()</code> with functional guards and interceptors. Tenant-aware roles, audit logging.</li>
+          <li><b>Decoupled the Angular frontend from the .NET monolith</b> into two independent builds joined by a custom bridge. Build time 1.5h → 15–20min (~80%); every dev recovered ~1h per merge cycle.</li>
+          <li><b>Sole engineer on WebClient.Admin</b> (React 19, Vite, Azure AD), the v3 admin microservice. Layout system, shared primitives, optimistic updates with rollback, full responsive layer. API-first: the frontend ships ahead of the backend endpoints.</li>
+          <li><b>Agents in the daily loop.</b> Claude Code drives the build across the Angular and React surfaces; Figma MCP feeds specs in with design tokens resolved. The path from handoff to shipped pixel collapses on my side.</li>
+          <li><b>AI extraction wired into the product flow.</b> Python + OpenAI API + Azure Functions behind iDeal Quotes. Replaced manual Excel-to-form copy-paste; accuracy 70% (late 2024) → 90–95% (2026).</li>
+          <li><b>iDeal Debt team lead</b> for a cycle (4 devs, 2 QA, 2 product). Mentored 2–3 engineers on architecture and review standards. 360 feedback (2026): <em>&ldquo;incredible mentor.&rdquo;</em></li>
         </ul>
-        <div class="stack"><span class="lbl">stack</span>React · TypeScript · Vite · Tailwind · Framer Motion · Playwright · Azure SWA · Azure AD · SignalR · <em>concurrent legacy:</em> Angular, RxJS, Signals</div>
+        <div class="stack"><span class="lbl">stack</span>Angular 20 · RxJS · signals · React 19 · TypeScript · Vite · Tailwind · Framer Motion · Playwright · .NET 8 · EF6 · MSSQL · Azure SWA · Azure AD · Python · OpenAI API</div>
       </div>
     </div>
 
@@ -659,7 +661,7 @@
       <div>
         <h3>Junior → Frontend Engineer → Frontend Lead</h3>
         <p class="at">KindGeek · SPDeveloper · Sombra · SoftStar IF</p>
-        <p class="ctx" style="margin-bottom:0">Lead at KindGeek on <b>EPIONE / Movebox</b> (healthcare, ZA) and <b>GeekHub</b> internal HRM. First hands-on shared-component-library work. Earlier junior Angular and intern roles.</p>
+        <p class="ctx" style="margin-bottom:0">KindGeek: <b>EPIONE</b> (healthcare, ZA, Angular), <b>Movebox</b> CRM (AngularJS → Angular rewrite), <b>GeekHub</b> internal HRM with first lead responsibilities. Earlier junior Angular and intern roles.</p>
       </div>
     </div>
 
@@ -686,8 +688,13 @@
       </div>
 
       <div class="skill-row">
+        <div class="k">Angular &amp; RxJS</div>
+        <div class="v"><b>Angular 19/20</b> (8 years), deep <b>RxJS</b> (<code>switchMap</code>/<code>mergeMap</code>/<code>concatMap</code>, <code>combineLatest</code>, <code>shareReplay</code>, hot/cold). OnPush, signals, signal↔observable bridging, standalone components, new control flow, <code>@defer</code>, <code>inject()</code>, functional guards/interceptors. component-store; NgRx/NGXS-shaped patterns. Config-driven form engines.</div>
+      </div>
+
+      <div class="skill-row">
         <div class="k">React &amp; TS</div>
-        <div class="v"><b>React</b>, <b>TypeScript</b>, Vite. Hooks, suspense, generics. Types match the API exactly, so wrong shapes fail at build. Tight component APIs so you cannot pass an invalid prop combination. Optimistic updates with rollback. Next.js (familiar).</div>
+        <div class="v"><b>React 19</b>, <b>TypeScript</b>, Vite. Hooks, suspense, generics. Types match the API exactly, so wrong shapes fail at build. Tight component APIs so you cannot pass an invalid prop combination. Optimistic updates with rollback. Next.js (familiar).</div>
       </div>
 
       <div class="skill-row">
@@ -717,7 +724,7 @@
 
       <div class="skill-row">
         <div class="k">Tooling</div>
-        <div class="v">Angular (8 years) · RxJS · Signals · Node.js · Python · C++ · Azure DevOps · Azure SWA · GitLab · Docker · Jest · Playwright · Bash · Linux · macOS</div>
+        <div class="v">Node.js · Python · C++ · .NET 8 · EF6 · MSSQL · Azure DevOps · Azure SWA · GitLab · Docker · Jest · Jasmine · Playwright · Bash · Linux · macOS</div>
       </div>
 
     </div>
